@@ -4,18 +4,20 @@ Web ôn tập trắc nghiệm 120 câu Đại số tuyến tính nền tảng �
 
 Là một trang static thuần: không cần build, không cần `npm install`, không có backend.
 
-## Chạy dự án
+**Làm bài online:** https://haimi612003.github.io/linear-algebra-quiz
 
-Phải chạy qua HTTP server — **không** mở file HTML bằng cách double-click, vì trang dùng `import('./quiz-data.js')` và giao thức `file://` chặn ES module (bộ câu hỏi sẽ không load, header đứng ở "đang tải…").
+## Chạy dự án ở máy
+
+Phải chạy qua HTTP server — **không** mở `index.html` bằng cách double-click, vì trang dùng `import('./quiz-data.js')` và giao thức `file://` chặn ES module (bộ câu hỏi sẽ không load, header đứng ở "đang tải…").
 
 ```bash
 cd "Web ôn tập trắc nghiệm"
 python3 -m http.server 8765 --bind 127.0.0.1
 ```
 
-Rồi mở: http://127.0.0.1:8765/Ôn%20tập%20Đại%20số%20tuyến%20tính.dc.html
+Rồi mở: http://127.0.0.1:8765
 
-Cách khác: extension **Live Server** của VS Code — bấm phải file HTML → *Open with Live Server*.
+Cách khác: extension **Live Server** của VS Code — bấm phải `index.html` → *Open with Live Server*.
 
 Trang nạp font từ Google Fonts nên lần đầu cần mạng; mất mạng thì vẫn chạy, chỉ đổi sang font hệ thống.
 
@@ -44,7 +46,7 @@ Trang nạp font từ Google Fonts nên lần đầu cần mạng; mất mạng 
 
 | File | Vai trò |
 | --- | --- |
-| `Ôn tập Đại số tuyến tính.dc.html` | Toàn bộ giao diện + logic quiz (class `Component extends DCLogic` trong `<script type="text/x-dc">`) |
+| `index.html` | Toàn bộ giao diện + logic quiz (class `Component extends DCLogic` trong `<script type="text/x-dc">`) |
 | `quiz-data.js` | Bộ 120 câu hỏi và 7 chương — ES module, export `QUESTIONS` và `CHAPTERS` |
 | `support.js` | Runtime dựng sẵn (React + template `x-dc`). **File generated — không sửa tay** |
 | `uploads/quiz-raw.txt` | Bản text gốc của bộ câu hỏi (nguồn để soạn `quiz-data.js`) |
