@@ -123,15 +123,15 @@ const raw = [
 [109,7,"Trong tích A(m × n) · x(n × 1), hai con số nào phải bằng nhau?",["m và 1","m và n","Con số n ở đuôi của A và con số n ở đầu của x","Không cần bằng nhau"],2,"Con số n ở đuôi của A phải bằng n ở đầu của x. (Mục 7.2)"],
 [110,7,"Kết quả của phép nhân (m × n) × (n × 1) có shape:",["(n × 1)","(m × 1)","(m × n)","(n × n)"],1,"(m × n) × (n × 1) → (m × 1). (Mục 7.2)"],
 [111,7,"Cho A = [[1, 2], [3, 4]] và x = [1, 2]. Giá trị b₁ (hàng 1) là:",["1×1 + 2×2 = 5","1×1 + 3×2 = 7","1 + 2 = 3","1 × 2 = 2"],0,"b₁ = 1×1 + 2×2 = 5. (Mục 7.3)"],
-[112,7,"Với cùng dữ liệu câu trên, giá trị b₂ (hàng 2) là:",["3×1 + 4×2 = 11","3 + 4 = 7","2×1 + 4×2 = 10","3 × 2 = 6"],0,"b₂ = 3×1 + 4×2 = 11. (Mục 7.3)"],
-[113,7,"Vậy kết quả Ax của hai câu trên là:",["[5, 11]","[7, 7]","[1, 8]","[3, 6]"],0,"Ax = [5, 11]ᵀ. (Mục 7.3)"],
+[112,7,"Cho A = [[1, 2], [3, 4]] và x = [1, 2]. Giá trị b₂ (hàng 2 của Ax) là:",["3×1 + 4×2 = 11","3 + 4 = 7","2×1 + 4×2 = 10","3 × 2 = 6"],0,"b₂ = 3×1 + 4×2 = 11. (Mục 7.3)"],
+[113,7,"Cho A = [[1, 2], [3, 4]] và x = [1, 2]. Kết quả Ax là:",["[5, 11]","[7, 7]","[1, 8]","[3, 6]"],0,"Ax = [5, 11]ᵀ. (Mục 7.3)"],
 [114,7,"Điểm khác biệt cốt lõi giữa phép nhân ma trận và Hadamard product là gì?",["Không có khác biệt","Nhân ma trận có bước cộng dồn (dot product theo hàng); Hadamard chỉ nhân từng cặp phần tử cùng vị trí","Hadamard cần ma trận vuông, nhân ma trận thì không","Nhân ma trận chỉ dùng cho scalar"],1,"Nhân ma trận có bước cộng dồn; Hadamard chỉ nhân từng cặp phần tử. (Mục 7.4)"],
 [115,7,"Cho A = [[1, 2], [3, 4]], B = [[5, 6], [7, 8]]. Tích Hadamard A ⊙ B là:",["[[19, 22], [43, 50]]","[[5, 12], [21, 32]]","[[6, 8], [10, 12]]","[[5, 6], [7, 8]]"],1,"A ⊙ B: nhân từng cặp → [[5, 12], [21, 32]]. (Mục 7.4)"],
-[116,7,"Với cùng A, B ở câu trên, tích ma trận AB cho phần tử ở góc trên trái là:",["1 × 5 = 5","1×5 + 2×7 = 19","1×5 + 2×6 = 17","1 + 5 = 6"],1,"AB góc trên trái = 1×5 + 2×7 = 19. (Mục 7.4)"],
+[116,7,"Cho A = [[1, 2], [3, 4]], B = [[5, 6], [7, 8]]. Tích ma trận AB (hàng nhân cột, cộng dồn) cho phần tử ở góc trên trái là:",["1 × 5 = 5","1×5 + 2×7 = 19","1×5 + 2×6 = 17","1 + 5 = 6"],1,"AB góc trên trái = 1×5 + 2×7 = 19. (Mục 7.4)"],
 [117,7,"(Đúng/Sai) Phép nhân ma trận và Hadamard product thường cho cùng một kết quả nếu áp dụng lên cùng cặp ma trận.",TF,1,"Sai — hai phép thường cho kết quả khác hẳn nhau. (Mục 7.4)"],
 [118,7,"Phép nhân ma trận nói chung có tính giao hoán không?",["Có, luôn luôn","Không, nói chung AB ≠ BA","Chỉ khi các phần tử dương","Chỉ khi là vector"],1,"Phép nhân ma trận nói chung không giao hoán. (Mục 7.4)"],
 [119,7,"Nếu A có shape (3, 2) và x có shape (3, 1), phép nhân Ax có hợp lệ không?",["Có, vì cùng có số 3","Không, vì số cột của A là 2 nhưng số hàng của x là 3 (không khớp)","Có, luôn hợp lệ","Chỉ khi chuyển vị x"],1,"Không hợp lệ: số cột của A (2) khác số hàng của x (3). (Mục 7.2)"],
-[120,7,"Để phép nhân Ax (với A shape (3, 2)) hợp lệ, x cần có shape:",["(3, 1)","(2, 1)","(1, 3)","(3, 3)"],1,"Với A shape (3, 2), x cần shape (2, 1). (Mục 7.2)"],
+[120,7,"Cho ma trận A có shape (3, 2). Để phép nhân Ax hợp lệ, vector x cần có shape:",["(3, 1)","(2, 1)","(1, 3)","(3, 3)"],1,"Với A shape (3, 2), x cần shape (2, 1). (Mục 7.2)"],
 ];
 
 export const QUESTIONS = raw.map(([id, ch, q, opts, ans, exp]) => ({ id, ch, q, opts, ans, exp }));
