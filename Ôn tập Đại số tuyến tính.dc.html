@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: oklch(0.968 0.008 85); }
+  * { box-sizing: border-box; }
+  a { color: oklch(0.52 0.1 215); }
+  a:hover { color: oklch(0.42 0.11 215); }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; font-family: 'IBM Plex Sans', system-ui, sans-serif; color: oklch(0.26 0.015 70); padding: 48px 24px 80px; display: flex; flex-direction: column; align-items: center; gap: 28px">
+
+  <header style="width: 100%; max-width: 860px; display: flex; align-items: baseline; justify-content: space-between; gap: 24px; border-bottom: 1px solid oklch(0.88 0.01 80); padding-bottom: 16px">
+    <div style="display: flex; flex-direction: column; gap: 4px">
+      <h1 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: -0.01em">Ôn tập Đại số tuyến tính</h1>
+      <p style="margin: 0; font-size: 13.5px; color: oklch(0.55 0.015 75)">120 câu trắc nghiệm nền tảng · scalar → Ax = b</p>
+    </div>
+    <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(0.6 0.015 75)">{{ headerNote }}</span>
+  </header>
+
+  <sc-if value="{{ isSetup }}" hint-placeholder-val="{{ true }}">
+    <main style="width: 100%; max-width: 860px; display: flex; flex-direction: column; gap: 24px">
+      <section style="background: oklch(0.995 0.004 85); border: 1px solid oklch(0.9 0.01 80); border-radius: 10px; padding: 28px 30px; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 19px; font-weight: 600">Chọn chương</h2>
+          <p style="margin: 0; font-size: 13.5px; color: oklch(0.55 0.015 75)">Bỏ chọn hết nghĩa là ôn toàn bộ 7 chương.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px">
+          <sc-for list="{{ chapterCards }}" as="c" hint-placeholder-count="7">
+            <button type="button" onClick="{{ c.toggle }}" style="{{ c.style }}">
+              <span style="display: flex; flex-direction: column; gap: 3px; text-align: left">
+                <span style="font-size: 14.5px; font-weight: 600">{{ c.title }}</span>
+                <span style="font-size: 12.5px; color: oklch(0.56 0.015 75); font-family: 'IBM Plex Mono', monospace">{{ c.range }}</span>
+              </span>
+              <span style="{{ c.dotStyle }}"></span>
+            </button>
+          </sc-for>
+        </div>
+      </section>
+
+      <section style="background: oklch(0.995 0.004 85); border: 1px solid oklch(0.9 0.01 80); border-radius: 10px; padding: 28px 30px; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 19px; font-weight: 600">Số câu mỗi lượt</h2>
+          <p style="margin: 0; font-size: 13.5px; color: oklch(0.55 0.015 75)">Câu hỏi được rút ngẫu nhiên từ các chương đã chọn — hiện có {{ poolCount }} câu.</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px">
+          <sc-for list="{{ countChips }}" as="c" hint-placeholder-count="5">
+            <button type="button" onClick="{{ c.pick }}" style="{{ c.style }}">{{ c.label }}</button>
+          </sc-for>
+        </div>
+        <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; color: oklch(0.4 0.015 70)">
+          <input type="checkbox" checked="{{ shuffleOpts }}" onChange="{{ toggleShuffle }}" style="width: 16px; height: 16px; accent-color: oklch(0.52 0.1 215); cursor: pointer" />
+          Xáo trộn thứ tự đáp án
+        </label>
+      </section>
+
+      <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap">
+        <button type="button" onClick="{{ start }}" style="border: none; background: oklch(0.38 0.05 215); color: oklch(0.98 0.005 85); font-family: inherit; font-size: 15px; font-weight: 600; padding: 13px 30px; border-radius: 7px; cursor: pointer" style-hover="background: oklch(0.31 0.055 215)">Bắt đầu làm bài</button>
+        <sc-if value="{{ hasSaved }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ resume }}" style="border: 1px solid oklch(0.82 0.015 80); background: transparent; color: oklch(0.4 0.015 70); font-family: inherit; font-size: 14.5px; padding: 12px 22px; border-radius: 7px; cursor: pointer" style-hover="border-color: oklch(0.6 0.02 80)">Tiếp tục lượt đang dở ({{ savedNote }})</button>
+        </sc-if>
+        <sc-if value="{{ hasWrongPool }}" hint-placeholder-val="{{ false }}">
+          <button type="button" onClick="{{ retryWrong }}" style="border: 1px solid oklch(0.82 0.015 80); background: transparent; color: oklch(0.4 0.015 70); font-family: inherit; font-size: 14.5px; padding: 12px 22px; border-radius: 7px; cursor: pointer" style-hover="border-color: oklch(0.6 0.02 80)">Ôn lại {{ wrongCount }} câu từng sai</button>
+        </sc-if>
+      </div>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isQuiz }}" hint-placeholder-val="{{ false }}">
+    <main style="width: 100%; max-width: 860px; display: flex; flex-direction: column; gap: 20px">
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; justify-content: space-between; font-size: 13px; color: oklch(0.55 0.015 75); font-family: 'IBM Plex Mono', monospace">
+          <span>Câu {{ posLabel }}</span>
+          <span>Đúng {{ correctCount }} · Sai {{ wrongSoFar }}</span>
+        </div>
+        <div style="height: 4px; background: oklch(0.9 0.01 80); border-radius: 99px; overflow: hidden">
+          <div style="{{ progressStyle }}"></div>
+        </div>
+      </div>
+
+      <section style="background: oklch(0.995 0.004 85); border: 1px solid oklch(0.9 0.01 80); border-radius: 10px; padding: 32px 34px; display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(0.6 0.015 75)">{{ chapterLabel }}</span>
+          <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 23px; line-height: 1.4; font-weight: 600; text-wrap: pretty">{{ questionText }}</h2>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px">
+          <sc-for list="{{ options }}" as="o" hint-placeholder-count="4">
+            <button type="button" onClick="{{ o.pick }}" style="{{ o.style }}">
+              <span style="{{ o.letterStyle }}">{{ o.letter }}</span>
+              <span style="flex: 1; text-align: left; line-height: 1.5">{{ o.text }}</span>
+              <span style="font-size: 15px; font-weight: 600; color: {{ o.markColor }}">{{ o.mark }}</span>
+            </button>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ revealed }}" hint-placeholder-val="{{ false }}">
+          <div style="{{ feedbackStyle }}">
+            <span style="font-size: 14.5px; font-weight: 600">{{ verdict }}</span>
+            <p style="margin: 0; font-size: 14.5px; line-height: 1.65; color: oklch(0.34 0.015 70); text-wrap: pretty">{{ explanation }}</p>
+          </div>
+        </sc-if>
+      </section>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px">
+        <button type="button" onClick="{{ quit }}" style="border: none; background: none; font-family: inherit; font-size: 13.5px; color: oklch(0.58 0.015 75); cursor: pointer; padding: 8px 0" style-hover="color: oklch(0.35 0.015 70)">Kết thúc sớm</button>
+        <div style="display: flex; align-items: center; gap: 16px">
+          <span style="font-size: 12.5px; color: oklch(0.62 0.015 75); font-family: 'IBM Plex Mono', monospace">phím 1–4 chọn · Enter tiếp</span>
+          <button type="button" onClick="{{ next }}" disabled="{{ nextDisabled }}" style="{{ nextStyle }}">{{ nextLabel }}</button>
+        </div>
+      </div>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{ isResult }}" hint-placeholder-val="{{ false }}">
+    <main style="width: 100%; max-width: 860px; display: flex; flex-direction: column; gap: 24px">
+      <section style="background: oklch(0.995 0.004 85); border: 1px solid oklch(0.9 0.01 80); border-radius: 10px; padding: 34px; display: flex; align-items: center; gap: 34px">
+        <div style="display: flex; flex-direction: column; gap: 2px; min-width: 150px">
+          <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 52px; font-weight: 700; line-height: 1; letter-spacing: -0.02em">{{ scoreText }}</span>
+          <span style="font-size: 13.5px; color: oklch(0.55 0.015 75)">{{ scorePct }}% chính xác</span>
+        </div>
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 9px">
+          <sc-for list="{{ chapterStats }}" as="s" hint-placeholder-count="4">
+            <div style="display: flex; align-items: center; gap: 12px; font-size: 13.5px">
+              <span style="width: 230px; color: oklch(0.4 0.015 70)">{{ s.name }}</span>
+              <span style="flex: 1; height: 6px; background: oklch(0.91 0.01 80); border-radius: 99px; overflow: hidden">
+                <span style="{{ s.barStyle }}"></span>
+              </span>
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: oklch(0.55 0.015 75); width: 52px; text-align: right">{{ s.score }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </section>
+
+      <sc-if value="{{ hasReview }}" hint-placeholder-val="{{ true }}">
+        <section style="display: flex; flex-direction: column; gap: 12px">
+          <h2 style="margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 19px; font-weight: 600">Các câu làm sai</h2>
+          <sc-for list="{{ review }}" as="r" hint-placeholder-count="3">
+            <div style="background: oklch(0.995 0.004 85); border: 1px solid oklch(0.9 0.01 80); border-left: 3px solid oklch(0.58 0.15 28); border-radius: 8px; padding: 18px 22px; display: flex; flex-direction: column; gap: 8px">
+              <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11.5px; color: oklch(0.6 0.015 75)">Câu {{ r.id }}</span>
+              <p style="margin: 0; font-size: 15px; font-weight: 600; line-height: 1.5; text-wrap: pretty">{{ r.q }}</p>
+              <p style="margin: 0; font-size: 14px; color: oklch(0.5 0.11 28)">Bạn chọn: {{ r.picked }}</p>
+              <p style="margin: 0; font-size: 14px; color: oklch(0.44 0.09 155)">Đáp án đúng: {{ r.correct }}</p>
+              <p style="margin: 0; font-size: 14px; line-height: 1.6; color: oklch(0.45 0.015 70); text-wrap: pretty">{{ r.exp }}</p>
+            </div>
+          </sc-for>
+        </section>
+      </sc-if>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap">
+        <button type="button" onClick="{{ again }}" style="border: none; background: oklch(0.38 0.05 215); color: oklch(0.98 0.005 85); font-family: inherit; font-size: 15px; font-weight: 600; padding: 13px 28px; border-radius: 7px; cursor: pointer" style-hover="background: oklch(0.31 0.055 215)">Lượt mới</button>
+        <sc-if value="{{ hasReview }}" hint-placeholder-val="{{ true }}">
+          <button type="button" onClick="{{ retryWrong }}" style="border: 1px solid oklch(0.82 0.015 80); background: transparent; color: oklch(0.4 0.015 70); font-family: inherit; font-size: 14.5px; padding: 12px 24px; border-radius: 7px; cursor: pointer" style-hover="border-color: oklch(0.6 0.02 80)">Làm lại các câu sai</button>
+        </sc-if>
+        <button type="button" onClick="{{ home }}" style="border: 1px solid oklch(0.82 0.015 80); background: transparent; color: oklch(0.4 0.015 70); font-family: inherit; font-size: 14.5px; padding: 12px 24px; border-radius: 7px; cursor: pointer" style-hover="border-color: oklch(0.6 0.02 80)">Về trang chọn đề</button>
+      </div>
+    </main>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:960,&quot;height&quot;:720}}">
+const KEY = 'lat-quiz-v1';
+const WRONG_KEY = 'lat-quiz-wrong-v1';
+
+class Component extends DCLogic {
+  state = {
+    ready: false, screen: 'setup', chapters: [], count: 20, shuffle: true,
+    items: [], idx: 0, picked: null, revealed: false, results: [],
+    saved: null, wrongIds: [],
+  };
+
+  componentDidMount() {
+    import('./quiz-data.js').then(m => {
+      this.DATA = m.QUESTIONS; this.CH = m.CHAPTERS;
+      let saved = null, wrongIds = [];
+      try { saved = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+      try { wrongIds = JSON.parse(localStorage.getItem(WRONG_KEY) || '[]'); } catch (e) {}
+      this.setState({ ready: true, saved, wrongIds });
+    });
+    this.onKey = (e) => {
+      if (this.state.screen !== 'quiz') return;
+      if (e.key >= '1' && e.key <= '9') {
+        const i = +e.key - 1;
+        const q = this.state.items[this.state.idx];
+        if (q && i < q.opts.length) { e.preventDefault(); this.pick(i); }
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        if (this.state.revealed) { e.preventDefault(); this.next(); }
+      }
+    };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); }
+
+  pool() {
+    const chs = this.state.chapters;
+    return this.DATA.filter(q => chs.length === 0 || chs.includes(q.ch));
+  }
+  shuffled(a) { const r = a.slice(); for (let i = r.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [r[i], r[j]] = [r[j], r[i]]; } return r; }
+
+  prep(list) {
+    return list.map(q => {
+      if (!this.state.shuffle) return { ...q, order: q.opts.map((_, i) => i) };
+      return { ...q, order: this.shuffled(q.opts.map((_, i) => i)) };
+    });
+  }
+
+  begin(list) {
+    this.setState({ screen: 'quiz', items: list, idx: 0, picked: null, revealed: false, results: [] }, this.persist);
+  }
+
+  persist = () => {
+    const s = this.state;
+    if (s.screen !== 'quiz') { try { localStorage.removeItem(KEY); } catch (e) {} return; }
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ items: s.items, idx: s.idx, results: s.results, at: Date.now() }));
+    } catch (e) {}
+  };
+
+  finish() {
+    const wrongNow = this.state.results.filter(r => !r.ok).map(r => r.id);
+    const merged = Array.from(new Set([...this.state.wrongIds, ...wrongNow]));
+    try { localStorage.setItem(WRONG_KEY, JSON.stringify(merged)); localStorage.removeItem(KEY); } catch (e) {}
+    this.setState({ screen: 'result', wrongIds: merged, saved: null });
+  }
+
+  pick(oi) {
+    if (this.state.revealed) return;
+    const q = this.state.items[this.state.idx];
+    const ok = oi === q.ans;
+    const results = [...this.state.results, { id: q.id, ch: q.ch, ok, picked: oi }];
+    this.setState({ picked: oi, revealed: true, results }, this.persist);
+  }
+
+  next = () => {
+    if (!this.state.revealed) return;
+    if (this.state.idx + 1 >= this.state.items.length) return this.finish();
+    this.setState({ idx: this.state.idx + 1, picked: null, revealed: false }, this.persist);
+  };
+
+  renderVals() {
+    const s = this.state;
+    if (!s.ready) return { headerNote: 'đang tải…', isSetup: false, isQuiz: false, isResult: false };
+
+    const base = {
+      isSetup: s.screen === 'setup', isQuiz: s.screen === 'quiz', isResult: s.screen === 'result',
+      retryWrong: () => {
+        const list = this.DATA.filter(q => s.wrongIds.includes(q.id));
+        if (list.length) this.begin(this.prep(this.shuffled(list)));
+      },
+      home: () => this.setState({ screen: 'setup', picked: null, revealed: false }),
+    };
+
+    if (s.screen === 'setup') {
+      const chip = (on) => `border: 1px solid ${on ? 'oklch(0.52 0.1 215)' : 'oklch(0.86 0.012 80)'}; background: ${on ? 'oklch(0.95 0.03 215)' : 'transparent'}; color: ${on ? 'oklch(0.35 0.08 215)' : 'oklch(0.45 0.015 70)'}; font-family: inherit; font-size: 14px; font-weight: ${on ? 600 : 400}; padding: 9px 18px; border-radius: 99px; cursor: pointer`;
+      const pool = this.pool().length;
+      return {
+        ...base,
+        headerNote: 'chọn đề',
+        poolCount: pool,
+        shuffleOpts: s.shuffle,
+        toggleShuffle: () => this.setState({ shuffle: !s.shuffle }),
+        hasSaved: !!(s.saved && s.saved.items && s.saved.idx < s.saved.items.length),
+        savedNote: s.saved ? `câu ${Math.min(s.saved.idx + 1, s.saved.items.length)}/${s.saved.items.length}` : '',
+        resume: () => this.setState({ screen: 'quiz', items: s.saved.items, idx: s.saved.idx, results: s.saved.results || [], picked: null, revealed: false }),
+        hasWrongPool: s.wrongIds.length > 0,
+        wrongCount: s.wrongIds.length,
+        chapterCards: this.CH.map(c => {
+          const on = s.chapters.includes(c.id);
+          return {
+            title: `Chương ${c.id} — ${c.name}`,
+            range: c.range,
+            style: `display: flex; align-items: center; justify-content: space-between; gap: 14px; text-align: left; font-family: inherit; color: inherit; padding: 14px 16px; border-radius: 8px; cursor: pointer; border: 1px solid ${on ? 'oklch(0.52 0.1 215)' : 'oklch(0.89 0.01 80)'}; background: ${on ? 'oklch(0.96 0.025 215)' : 'oklch(0.98 0.005 85)'}`,
+            dotStyle: `width: 12px; height: 12px; border-radius: 99px; flex: none; border: 1px solid ${on ? 'oklch(0.52 0.1 215)' : 'oklch(0.8 0.015 80)'}; background: ${on ? 'oklch(0.52 0.1 215)' : 'transparent'}`,
+            toggle: () => this.setState({ chapters: on ? s.chapters.filter(x => x !== c.id) : [...s.chapters, c.id] }),
+          };
+        }),
+        countChips: [10, 20, 30, 50, 0].map(n => ({
+          label: n === 0 ? `Tất cả (${pool})` : `${n} câu`,
+          style: chip(s.count === n),
+          pick: () => this.setState({ count: n }),
+        })),
+        start: () => {
+          const p = this.shuffled(this.pool());
+          const n = s.count === 0 ? p.length : Math.min(s.count, p.length);
+          this.begin(this.prep(p.slice(0, n)));
+        },
+      };
+    }
+
+    if (s.screen === 'quiz') {
+      const q = s.items[s.idx];
+      const ch = this.CH.find(c => c.id === q.ch);
+      const correctSoFar = s.results.filter(r => r.ok).length;
+      const isCorrect = s.picked === q.ans;
+      return {
+        ...base,
+        headerNote: `${s.idx + 1} / ${s.items.length}`,
+        posLabel: `${s.idx + 1} / ${s.items.length}`,
+        correctCount: correctSoFar,
+        wrongSoFar: s.results.length - correctSoFar,
+        progressStyle: `height: 100%; width: ${((s.idx + (s.revealed ? 1 : 0)) / s.items.length) * 100}%; background: oklch(0.52 0.1 215); border-radius: 99px; transition: width .25s ease`,
+        chapterLabel: `Chương ${ch.id} · ${ch.name}`,
+        questionText: q.q,
+        revealed: s.revealed,
+        verdict: isCorrect ? 'Chính xác' : 'Chưa đúng',
+        explanation: q.exp,
+        feedbackStyle: `display: flex; flex-direction: column; gap: 6px; padding: 16px 18px; border-radius: 8px; background: ${isCorrect ? 'oklch(0.96 0.03 155)' : 'oklch(0.965 0.025 28)'}; border: 1px solid ${isCorrect ? 'oklch(0.86 0.06 155)' : 'oklch(0.87 0.05 28)'}; color: ${isCorrect ? 'oklch(0.42 0.09 155)' : 'oklch(0.46 0.11 28)'}`,
+        options: q.order.map((oi, i) => {
+          const picked = s.picked === oi;
+          const isAns = oi === q.ans;
+          let border = 'oklch(0.89 0.01 80)', bg = 'oklch(0.985 0.004 85)', accent = 'oklch(0.6 0.015 75)', mark = '', markColor = 'transparent';
+          if (s.revealed && isAns) { border = 'oklch(0.6 0.1 155)'; bg = 'oklch(0.97 0.03 155)'; accent = 'oklch(0.45 0.1 155)'; mark = '✓'; markColor = 'oklch(0.45 0.1 155)'; }
+          else if (s.revealed && picked) { border = 'oklch(0.63 0.12 28)'; bg = 'oklch(0.97 0.025 28)'; accent = 'oklch(0.5 0.13 28)'; mark = '✕'; markColor = 'oklch(0.5 0.13 28)'; }
+          return {
+            letter: String.fromCharCode(65 + i),
+            text: q.opts[oi],
+            mark, markColor,
+            letterStyle: `flex: none; width: 26px; height: 26px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; font-weight: 500; color: ${accent}; border: 1px solid ${border}`,
+            style: `display: flex; align-items: center; gap: 14px; width: 100%; text-align: left; font-family: inherit; font-size: 15.5px; color: oklch(0.28 0.015 70); padding: 14px 16px; border-radius: 8px; cursor: ${s.revealed ? 'default' : 'pointer'}; border: 1px solid ${border}; background: ${bg}; transition: border-color .15s ease, background .15s ease`,
+            pick: () => this.pick(oi),
+          };
+        }),
+        nextDisabled: !s.revealed,
+        nextLabel: s.idx + 1 >= s.items.length ? 'Xem kết quả' : 'Tiếp',
+        nextStyle: `border: none; font-family: inherit; font-size: 15px; font-weight: 600; padding: 12px 28px; border-radius: 7px; color: oklch(0.98 0.005 85); background: ${s.revealed ? 'oklch(0.38 0.05 215)' : 'oklch(0.84 0.012 80)'}; cursor: ${s.revealed ? 'pointer' : 'not-allowed'}`,
+        next: this.next,
+        quit: () => (s.results.length ? this.finish() : this.setState({ screen: 'setup' }, this.persist)),
+      };
+    }
+
+    const total = s.results.length;
+    const correct = s.results.filter(r => r.ok).length;
+    const byCh = {};
+    s.results.forEach(r => { (byCh[r.ch] = byCh[r.ch] || { t: 0, c: 0 }).t++; if (r.ok) byCh[r.ch].c++; });
+    const wrong = s.results.filter(r => !r.ok);
+    return {
+      ...base,
+      headerNote: 'kết quả',
+      scoreText: `${correct}/${total}`,
+      scorePct: total ? Math.round((correct / total) * 100) : 0,
+      chapterStats: Object.keys(byCh).map(k => {
+        const c = this.CH.find(x => x.id === +k), d = byCh[k], pct = (d.c / d.t) * 100;
+        return {
+          name: `Ch.${k} — ${c.name}`,
+          score: `${d.c}/${d.t}`,
+          barStyle: `display: block; height: 100%; width: ${pct}%; border-radius: 99px; background: ${pct >= 80 ? 'oklch(0.62 0.1 155)' : pct >= 50 ? 'oklch(0.72 0.11 85)' : 'oklch(0.63 0.13 28)'}`,
+        };
+      }),
+      hasReview: wrong.length > 0,
+      review: wrong.map(r => {
+        const q = this.DATA.find(x => x.id === r.id);
+        return { id: q.id, q: q.q, picked: q.opts[r.picked], correct: q.opts[q.ans], exp: q.exp };
+      }),
+      again: () => this.setState({ screen: 'setup' }),
+    };
+  }
+}
+</script>
+</body>
+</html>

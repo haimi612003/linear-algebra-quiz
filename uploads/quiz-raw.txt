@@ -1,0 +1,666 @@
+Mục lục
+Bộ câu hỏi trắc nghiệm: Đại số tuyến tính (Nền tảng) 1
+PHẦN CÂU HỎI . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1
+PHẦN ĐÁP ÁN VÀ GIẢI THÍCH . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+Bộ câu hỏi trắc nghiệm: Đại số tuyến tính (Nền tảng)
+Bộ đề gồm 120 câu, bám sát bài viết “Đại số tuyến tính: Từ scalar đến phương trình
+Ax = b”. Câu hỏi được nhóm theo chương để tiện ôn tập. Đề ưu tiên các kiến thức nền
+tảng, cơ bản.
+Cách sử dụng: Làm hết phần câu hỏi trước, sau đó đối chiếu với phần Đáp án và
+giải thích ở cuối. Mỗi đáp án đều ghi kèm vị trí (chương/mục) trong blog để bạn tra
+lại khi cần.
+Phạm vi kiến thức: Bộ đề chỉ bao gồm nội dung có trong blog (scalar, vector, matrix,
+tensor, các phép toán element-wise, broadcasting, hệ phương trình tuyến tính, Ax = b,
+phép nhân ma trận–vector). Không bao gồm các chủ đề nâng cao như định thức, ma
+trận nghịch đảo, eigenvalue — vì các chủ đề này nằm ngoài phạm vi blog.
+PHẦN CÂU HỎI
+Chương 1 — Scalar, Variable và Constant (Câu 1–16)
+Câu 1. Scalar là gì? - A. Một danh sách có thứ tự gồm nhiều con số - B. Một giá trị
+đơn — một con số duy nhất - C. Một bảng số hai chiều - D. Một mảng số nhiều chiều
+Câu 2. Theo cách phân loại theo số chiều, scalar là đối tượng: - A. Một chiều - B. Hai
+chiều - C. Không chiều (0 chiều) - D. Ba chiều
+Câu 3. Ký hiệu 𝑥 ∈ ℝ có nghĩa là gì? - A. x là một vector thuộc không gian thực - B. x
+là một ma trận thực - C. x là một số thực (một scalar) - D. x là một tập hợp các số thực
+Câu 4. Variable (biến số) được định nghĩa là: - A. Một giá trị luôn cố định trong mọi
+bài toán - B. Một giá trị chưa biết, hoặc có thể thay đổi trong bài toán đang xét - C.
+Một giá trị luôn bằng 0 - D. Một con số nguyên dương
+Câu 5. Constant (hằng số) được định nghĩa là: - A. Một giá trị đã biết trước, hoặc được
+giữ cố định trong bài toán hiện tại - B. Một giá trị luôn thay đổi - C. Một vector có
+nhiều thành phần - D. Một giá trị chưa xác định
+Câu 6. Trong phương trình 2𝑥 + 3 = 7, đại lượng nào đóng vai trò variable? - A. Số 3
+- B. Số 7 - C. x - D. Số 2
+Câu 7. Trong phương trình 2𝑥 + 3 = 7, các số 3 và 7 đóng vai trò gì? - A. Variable - B.
+Constant - C. Vector - D. Matrix
+Câu 8. Một con số là variable hay constant phụ thuộc vào điều gì? - A. Con số đó lớn
+hay nhỏ - B. Con số đó âm hay dương - C. Vai trò của nó trong bài toán đang xét (ngữ
+1
+
+-- 1 of 15 --
+
+cảnh) - D. Con số đó nguyên hay thực
+Câu 9. Trong công thức dự đoán giá nhà price = 𝑤 × area + 𝑏, ở giai đoạn đi tìm công
+thức (huấn luyện), 𝑤 và 𝑏 đóng vai trò gì? - A. Constant, vì chúng cố định - B. Variable,
+vì chúng là ẩn số cần tìm - C. Vector kết quả - D. Ma trận hệ số
+Câu 10. Cũng trong công thức trên, sau khi đã tìm được 𝑤 = 1400 và 𝑏 = 1200, thì 𝑤
+và 𝑏 trong công thức dự đoán đóng vai trò gì? - A. Variable - B. Constant - C. Vector -
+D. Random variable
+Câu 11. Sau khi công thức price = 1400 × area + 1200 đã cố định, đại lượng nào bây
+giờ đóng vai trò variable (đầu vào thay đổi tùy căn nhà)? - A. area - B. Số 1400 - C. Số
+1200 - D. price luôn cố định
+Câu 12. (Đúng/Sai) Một đại lượng đã là variable trong một bài toán thì mãi mãi là
+variable trong mọi bài toán khác.
+Câu 13. Scalar thường được ký hiệu bằng: - A. Chữ cái in hoa in đậm - B. Chữ cái viết
+thường (không in đậm) - C. Chữ cái viết thường in đậm - D. Ký hiệu mũi tên
+Câu 14. (Đúng/Sai) Cùng hai ký hiệu 𝑤 và 𝑏 có thể là variable ở giai đoạn huấn luyện
+và là constant ở giai đoạn dự đoán.
+Câu 15. Đâu là ví dụ đúng về một scalar? - A. [1 2 3] - B. Số 5 - C. Một bảng gồm 6
+con số - D. Một ảnh RGB
+Câu 16. Điều nào sau đây mô tả đúng mối quan hệ giữa scalar, variable và constant?
+- A. Variable và constant là hai loại đối tượng hoàn toàn khác scalar - B. Variable và
+constant đều là scalar, chỉ khác nhau ở vai trò trong bài toán - C. Constant là một loại
+vector đặc biệt - D. Scalar là trường hợp đặc biệt của variable
+Chương 2 — Vector (Câu 17–34)
+Câu 17. Vector là gì? - A. Một con số duy nhất - B. Một danh sách có thứ tự gồm nhiều
+scalar - C. Một bảng số hai chiều - D. Một phép biến đổi
+Câu 18. Theo cách phân loại theo số chiều, vector là đối tượng: - A. Không chiều - B.
+Một chiều - C. Hai chiều - D. Ba chiều
+Câu 19. Vector thường được ký hiệu bằng: - A. Chữ cái viết thường in đậm - B. Chữ
+cái in hoa - C. Chữ số - D. Chữ cái viết thường không in đậm
+Câu 20. Ký hiệu x ∈ ℝ𝑚 có nghĩa là gì? - A. x là một số thực - B. x là một vector gồm
+𝑚 số thực - C. x là một ma trận 𝑚 × 𝑚 - D. x là một tensor bậc 𝑚
+Câu 21. Sự khác nhau cốt lõi giữa ℝ và ℝ𝑚 là gì? - A. ℝ là số phức, ℝ𝑚 là số thực - B.
+ℝ là tập các số thực (một số); ℝ𝑚 là tập các vector gồm 𝑚 số thực - C. Không có khác
+biệt gì - D. ℝ chỉ chứa số nguyên
+Câu 22. Vector v = [5 2 9]⊤ thuộc không gian nào? - A. ℝ - B. ℝ2 - C. ℝ3 - D. ℝ9
+2
+
+-- 2 of 15 --
+
+Câu 23. Số mũ 𝑚 trong ký hiệu ℝ𝑚 cho biết điều gì? - A. Giá trị lớn nhất của vector -
+B. Số thành phần của vector - C. Số chiều của không gian ảnh - D. Tổng các phần tử
+của vector
+Câu 24. Nhiều giá trị scalar hợp lại theo chiều dọc tạo thành: - A. Vector hàng - B.
+Vector cột - C. Ma trận - D. Scalar
+Câu 25. Vector hàng thu được từ vector cột bằng phép toán nào? - A. Phép cộng - B.
+Phép nhân - C. Phép chuyển vị (transpose) - D. Phép broadcasting
+Câu 26. Ký hiệu ⊤ trong x⊤ đại diện cho: - A. Phép nhân - B. Phép chuyển vị (transpose)
+- C. Phép nghịch đảo - D. Phép lấy độ dài
+Câu 27. Phép chuyển vị làm thay đổi điều gì? - A. Giá trị của các thành phần - B. Cách
+sắp xếp (từ cột sang hàng và ngược lại), không đổi giá trị - C. Số lượng phần tử - D.
+Dấu của các thành phần
+Câu 28. Theo quy ước phổ biến, nếu không nói gì thêm thì một vector được hiểu mặc
+định là: - A. Vector hàng - B. Vector cột - C. Ma trận vuông - D. Scalar
+Câu 29. (Đúng/Sai) Quy ước “vector mặc định là vector cột” là một định luật toán học
+bắt buộc trong mọi tài liệu.
+Câu 30. Theo “thần chú” trong bối cảnh dữ liệu, vector cột thường đại diện cho: - A.
+Một sample - B. Một feature - C. Một bảng dữ liệu - D. Một tensor
+Câu 31. Theo “thần chú” trong bối cảnh dữ liệu, vector hàng thường đại diện cho: - A.
+Một feature - B. Một sample gồm nhiều feature - C. Một scalar - D. Một phép biến đổi
+Câu 32. Một số tài liệu dùng ký hiệu nào khác để chỉ vector chuyển vị (ngoài x⊤)? - A.
+x∗ - B. x′ (dấu phẩy trên) - C. x−1 - D. |x|
+Câu 33. Trong ký hiệu vector cột x = ⎡
+⎢
+⎣
+𝑥1
+𝑥2
+⋮
+𝑥𝑚
+⎤
+⎥
+⎦
+, mỗi 𝑥𝑖 là: - A. Một vector - B. Một ma
+trận - C. Một scalar (thành phần đơn lẻ) - D. Một tensor
+Câu 34. Vì sao x (in đậm) và 𝑥 (không đậm) không nên hiểu là cùng một loại đối tượng?
+- A. Vì chúng có màu khác nhau - B. Vì x in đậm là vector (nhiều số), còn 𝑥 không đậm
+là scalar (một số) - C. Vì x luôn lớn hơn 𝑥 - D. Vì chúng thuộc hai môn học khác nhau
+Chương 3 — Matrix (Câu 35–50)
+Câu 35. Matrix (ma trận) là gì? - A. Một con số duy nhất - B. Một danh sách một chiều
+các số - C. Một mảng số hai chiều, sắp xếp thành hàng và cột - D. Một phép biến đổi
+tuyến tính
+Câu 36. Theo cách phân loại theo số chiều, matrix là đối tượng: - A. Không chiều - B.
+Một chiều - C. Hai chiều - D. Bốn chiều
+Câu 37. Một cách nhìn hữu ích: ma trận là gì? - A. Nhiều scalar cộng lại - B. Nhiều
+vector cột đặt cạnh nhau - C. Một vector hàng duy nhất - D. Một tensor bậc 3
+3
+
+-- 3 of 15 --
+
+Câu 38. Ma trận thường được ký hiệu bằng: - A. Chữ cái viết thường - B. Chữ cái in
+hoa (thường in đậm) - C. Chữ số - D. Ký hiệu mũi tên
+Câu 39. Ký hiệu X ∈ ℝ𝑚×𝑛 có nghĩa là ma trận có: - A. 𝑚 cột và 𝑛 hàng - B. 𝑚 hàng
+và 𝑛 cột - C. 𝑚 × 𝑛 hàng - D. 𝑚 + 𝑛 phần tử
+Câu 40. Ma trận X ∈ ℝ𝑚×𝑛 có tổng cộng bao nhiêu phần tử? - A. 𝑚 + 𝑛 - B. 𝑚 − 𝑛 -
+C. 𝑚 × 𝑛 - D. max(𝑚, 𝑛)
+Câu 41. “Thần chú” giúp nhớ thứ tự đọc kích thước ma trận là gì? - A. “Cột trước, hàng
+sau” - B. “Hàng trước, cột sau” - C. “Lớn trước, nhỏ sau” - D. “Trái trước, phải sau”
+Câu 42. Ma trận B ∈ ℝ5×2 có bao nhiêu hàng và bao nhiêu cột? - A. 2 hàng, 5 cột - B.
+5 hàng, 2 cột - C. 5 hàng, 5 cột - D. 10 hàng, 1 cột
+Câu 43. Ma trận B ∈ ℝ5×2 có tổng cộng bao nhiêu phần tử? - A. 7 - B. 3 - C. 10 - D. 25
+Câu 44. Phần tử 𝑥𝑖,𝑗 của ma trận nằm ở vị trí nào? - A. Hàng thứ 𝑗, cột thứ 𝑖 - B. Hàng
+thứ 𝑖, cột thứ 𝑗 - C. Luôn ở góc trên bên trái - D. Hàng và cột bất kỳ
+Câu 45. Nếu xem ma trận như một bảng dữ liệu, thì một ô bất kỳ trong bảng tương
+ứng với: - A. Scalar - B. Vector - C. Matrix - D. Tensor
+Câu 46. Nếu xem ma trận như một bảng dữ liệu, thì một cột hoặc một hàng tương
+ứng với: - A. Scalar - B. Vector - C. Matrix - D. Tensor
+Câu 47. Nếu xem ma trận như một bảng dữ liệu, thì toàn bộ bảng tương ứng với: - A.
+Scalar - B. Vector - C. Matrix - D. Tensor
+Câu 48. Một bảng dữ liệu gồm 100 sample và 8 feature (mỗi hàng là một sample, mỗi
+cột là một feature) được biểu diễn bằng ma trận có kích thước: - A. 8 × 100 - B. 100 × 8
+- C. 100 × 100 - D. 8 × 8
+Câu 49. (Đúng/Sai) Ký hiệu ℝ3×4 và ℝ4×3 mô tả các ma trận có cùng kích thước.
+Câu 50. Trong ma trận X = [x1 x2 ⋯ x𝑛], mỗi x𝑗 là gì? - A. Một scalar - B. Một
+vector cột - C. Một ma trận con - D. Một hàng của ma trận
+Chương 4 — Tensor (Câu 51–60)
+Câu 51. Tensor là gì? - A. Đối tượng chỉ có hai chiều - B. Đối tượng tổng quát cho các
+mảng số nhiều chiều - C. Một con số duy nhất - D. Một vector đặc biệt
+Câu 52. Theo cách phân loại theo bậc (order), scalar là tensor bậc mấy? - A. Bậc 0 -
+B. Bậc 1 - C. Bậc 2 - D. Bậc 3
+Câu 53. Vector là tensor bậc mấy? - A. Bậc 0 - B. Bậc 1 - C. Bậc 2 - D. Bậc 3
+Câu 54. Matrix là tensor bậc mấy? - A. Bậc 0 - B. Bậc 1 - C. Bậc 2 - D. Bậc 3
+Câu 55. Lĩnh vực nào thường cần làm việc với tensor có số chiều lớn hơn hai? - A. Xử
+lý văn bản đơn thuần - B. Thị giác máy tính (computer vision) - C. Cộng hai số - D. Giải
+phương trình bậc nhất
+4
+
+-- 4 of 15 --
+
+Câu 56. Một ảnh màu RGB có thể được tách thành mấy ma trận? - A. 1 - B. 2 - C. 3
+(ứng với Red, Green, Blue) - D. 4
+Câu 57. Một ảnh RGB kích thước 600 × 800 pixel được biểu diễn bằng tensor có kích
+thước: - A. 600 × 800 - B. 600 × 800 × 3 - C. 3 × 600 × 800 hiểu là 1800 × 800 - D.
+600 × 800 × 1
+Câu 58. “Thần chú” mô tả tensor là gì? - A. Nhiều scalar cộng lại - B. Nhiều lát ma
+trận cùng kích thước được xếp chồng (stack) theo chiều sâu - C. Một vector hàng dài
+- D. Một bảng Excel phẳng
+Câu 59. Ba ma trận R, G, B của ảnh màu được xếp chồng theo chiều nào? - A. Chiều
+ngang - B. Chiều dọc - C. Chiều sâu (channel) - D. Không xếp chồng, để rời
+Câu 60. (Đúng/Sai) Scalar, vector và matrix đều có thể xem là các trường hợp riêng
+của tensor, phân loại theo bậc.
+Chương 5 — Các phép toán trên vector và ma trận (Câu 61–82)
+Câu 61. Operator (toán tử) có thể hiểu là gì? - A. Một loại số đặc biệt - B. Một quy tắc
+dùng để biến đổi dữ liệu - C. Một ma trận vuông - D. Một loại vector
+Câu 62. Phép cộng hai vector được thực hiện theo kiểu: - A. Nhân từng cặp phần tử -
+B. Element-wise (cộng từng cặp phần tử ở cùng vị trí) - C. Cộng dồn tất cả thành một
+số - D. Lấy phần tử lớn nhất
+Câu 63. Kết quả của [
+1
+2
+3] + [
+4
+5
+6] là: - A. [
+5
+7
+9] - B. [
+4
+10
+18] - C. 32 - D. [
+3
+3
+3]
+Câu 64. Kết quả của [
+4
+5
+6] − [
+1
+2
+3] là: - A. [
+5
+7
+9] - B. [
+3
+3
+3] - C. [
+4
+10
+18] - D. [
+−3
+−3
+−3]
+Câu 65. Điều kiện để cộng/trừ hai vector (hoặc hai ma trận) theo kiểu element-wise
+mặc định là: - A. Chúng phải có cùng shape - B. Chúng phải là ma trận vuông - C. Một
+cái phải lớn hơn cái kia - D. Không có điều kiện nào
+Câu 66. Phép cộng/trừ vector có làm thay đổi shape của kết quả không? - A. Có, luôn
+tăng số chiều - B. Không, kết quả giữ nguyên shape với các toán hạng - C. Có, luôn
+giảm số chiều - D. Tùy vào giá trị các phần tử
+Câu 67. Một vector 3 phần tử có thể cộng element-wise trực tiếp (không broadcasting)
+với một vector 2 phần tử không? - A. Có, luôn được - B. Không, vì khác shape - C. Có,
+nếu các số đều dương - D. Có, nếu là vector cột
+Câu 68. Phép cộng ma trận có tính giao hoán không? - A. Có: A + B = B + A - B.
+Không bao giờ - C. Chỉ khi ma trận vuông - D. Chỉ khi các phần tử dương
+Câu 69. Phép trừ ma trận có tính giao hoán không? - A. Có - B. Không, trong trường
+hợp tổng quát A − B ≠ B − A - C. Luôn luôn có - D. Chỉ khi ma trận có kích thước lẻ
+5
+
+-- 5 of 15 --
+
+Câu 70. Hadamard product là phép toán gì? - A. Nhân ma trận theo kiểu hàng-nhân-
+cột - B. Nhân element-wise (từng cặp phần tử cùng vị trí) giữa hai đối tượng cùng
+shape - C. Cộng dồn tất cả phần tử - D. Phép chuyển vị
+Câu 71. Ký hiệu của Hadamard product là: - A. × - B. ⊙ - C. ⊘ - D. ⊤
+Câu 72. Kết quả của [
+1
+2
+3] ⊙ [
+4
+5
+6] là: - A. [
+5
+7
+9] - B. [
+4
+10
+18] - C. 32 - D. [
+4
+5
+6]
+Câu 73. Ký hiệu của Hadamard division là: - A. ⊙ - B. ⊘ - C. × - D. ⊤
+Câu 74. Kết quả của [
+8
+10
+12] ⊘ [
+2
+5
+3] là: - A. [
+4
+2
+4] - B. [
+4
+5
+4] - C. [
+16
+50
+36] - D. [
+6
+5
+9]
+Câu 75. Hadamard product có tính giao hoán không? - A. Có: u ⊙ v = v ⊙ u - B. Không
+- C. Chỉ khi hai vector khác nhau - D. Chỉ với ma trận vuông
+Câu 76. Hadamard division có tính giao hoán không? - A. Có - B. Không - C. Luôn luôn
+có - D. Chỉ khi các phần tử bằng nhau
+Câu 77. Broadcasting là gì? - A. Cơ chế mở rộng tạm thời đối tượng nhỏ hơn cho khớp
+với đối tượng lớn hơn để thực hiện phép toán element-wise - B. Phép nhân hai ma trận
+- C. Phép chuyển vị ma trận - D. Cách sắp xếp lại các hàng của ma trận
+Câu 78. (Đúng/Sai) Broadcasting nhất thiết phải tạo ra nhiều bản sao thật của dữ liệu
+trong bộ nhớ.
+Câu 79. Kết quả của [
+1
+2
+3] + 10 (broadcasting với scalar) là: - A. [
+11
+12
+13] - B. [
+10
+20
+30] - C.
+16 - D. [
+10
+10
+10]
+Câu 80. Với ma trận X ∈ ℝ3×2, cộng với một vector hàng shape 1 × 2 thì broadcasting
+diễn ra: - A. Theo cột - B. Theo hàng (lặp lại vector đó xuống từng hàng) - C. Không
+thực hiện được - D. Theo đường chéo
+Câu 81. Với ma trận X ∈ ℝ3×2, cộng với một vector cột shape 3 × 1 thì broadcasting
+diễn ra: - A. Theo hàng - B. Theo cột (lặp lại vector đó sang từng cột) - C. Không thực
+hiện được - D. Theo đường chéo
+Câu 82. Vì sao scalar gần như luôn broadcast được với vector, matrix hay tensor? - A.
+Vì scalar là số lớn nhất - B. Vì scalar được hiểu là “áp dụng cùng một giá trị cho mọi
+phần tử” - C. Vì scalar luôn bằng 0 - D. Vì scalar có nhiều chiều
+Chương 6 — Bản chất của ma trận: Hệ phương trình tuyến tính (Câu 83–102)
+Câu 83. Về bản chất sâu xa nhất, ma trận là gì? - A. Một con số phức tạp - B. Một
+cách viết cô đọng của cả một hệ phương trình tuyến tính có cùng cấu trúc - C. Một
+6
+
+-- 6 of 15 --
+
+loại hình ảnh - D. Một phép chia đặc biệt
+Câu 84. Trong bài toán tính điểm trung bình với Toán hệ số 3, Văn hệ số 2, Anh hệ số
+1, tổng các hệ số dùng để chia là: - A. 3 - B. 6 - C. 1 - D. 5
+Câu 85. Khi viết các phương trình tính điểm cho nhiều học sinh, ta nhận ra điều gì
+về cấu trúc của chúng? - A. Mỗi phương trình có cấu trúc hoàn toàn khác nhau - B.
+Chúng có cùng cấu trúc, chỉ khác dữ liệu điểm của từng học sinh - C. Chúng không
+liên quan gì đến nhau - D. Chúng đều vô nghiệm
+Câu 86. Dạng tổng quát mà đại số tuyến tính dùng để ký hiệu hệ phương trình tuyến
+tính cô đọng là: - A. A + x = b - B. Ax = b - C. A ⊙ x = b - D. A⊤ = b
+Câu 87. Trong Ax = b, A là gì? - A. Vector kết quả đã biết - B. Ma trận hệ số (hoặc
+ma trận dữ liệu), chứa các giá trị đã biết - C. Vector ẩn cần tìm - D. Một scalar
+Câu 88. Trong Ax = b, x là gì? - A. Ma trận dữ liệu - B. Vector ẩn (hoặc vector trọng
+số) chưa biết cần tìm - C. Vector kết quả đã biết - D. Một hằng số
+Câu 89. Trong Ax = b, b là gì? - A. Ma trận hệ số - B. Vector ẩn cần tìm - C. Vector
+kết quả đã biết - D. Một ma trận vuông
+Câu 90. Trong ví dụ điểm trung bình, mỗi hàng của ma trận điểm số đại diện cho: - A.
+Một môn học (feature) - B. Một học sinh (sample/individual) - C. Một hệ số - D. Điểm
+trung bình
+Câu 91. Trong ví dụ điểm trung bình, mỗi cột của ma trận điểm số đại diện cho: - A.
+Một học sinh - B. Một môn học (feature) — ví dụ toàn bộ điểm Toán - C. Một hệ số duy
+nhất - D. Điểm trung bình
+Câu 92. Vì sao vector trọng số phải viết dưới dạng vector cột khi tính Xw? - A. Vì cho
+đẹp - B. Vì shape phải khớp khi nhân ma trận - C. Vì vector hàng không tồn tại - D. Vì
+trọng số luôn dương
+Câu 93. Nếu bảng điểm có shape 𝑚 × 𝑛 thì vector trọng số cần có shape gì để phép
+nhân Xw hợp lệ? - A. 𝑚 × 1 - B. 𝑛 × 1 - C. 1 × 𝑚 - D. 𝑚 × 𝑛
+Câu 94. Nếu bảng điểm có shape 𝑚 × 𝑛 và vector trọng số có shape 𝑛 × 1, thì kết
+quả y có shape: - A. 𝑛 × 1 - B. 𝑚 × 1 - C. 𝑚 × 𝑛 - D. 1 × 1
+Câu 95. Câu nói “Ma trận không phải một thứ gì xa lạ hay huyền bí. Nó chỉ là cách
+viết gọn nhiều phương trình tuyến tính có cùng cấu trúc” nhấn mạnh điều gì? - A. Ma
+trận rất khó hiểu - B. Bản chất của ma trận là công cụ cô đọng hệ phương trình - C.
+Ma trận chỉ dùng trong ảnh - D. Ma trận là một loại scalar
+Câu 96. Theo góc nhìn “tổ hợp tuyến tính của các cột”, tích Ax được tính bằng cách: -
+A. Cộng tất cả phần tử của A và x - B. Lấy từng cột của A nhân với một số (lấy từ thành
+phần của x) rồi cộng lại - C. Nhân từng phần tử cùng vị trí - D. Chuyển vị A rồi cộng x
+Câu 97. Với A = [
+1 4
+2 5
+3 6] và x = [10
+20], theo góc nhìn tổ hợp tuyến tính, ta tính
+10 [
+1
+2
+3] + 20 [
+4
+5
+6]. Kết quả là: - A. [
+90
+120
+150] - B. [
+10
+40
+90] - C. [
+30
+30
+30] - D. [
+11
+22
+33]
+7
+
+-- 7 of 15 --
+
+Câu 98. Theo góc nhìn tổ hợp tuyến tính, mỗi thành phần của x đóng vai trò như: - A.
+Một chỉ số hàng - B. Một “liều lượng” pha trộn cho một cột tương ứng của A - C. Một
+phần tử cần chuyển vị - D. Một hằng số cộng thêm
+Câu 99. Theo góc nhìn tổ hợp tuyến tính, phương trình Ax = b có nghiệm khi: - A.
+Khi A là ma trận vuông - B. Khi b có thể tạo ra bằng cách pha trộn (tổ hợp tuyến tính)
+các cột của A - C. Khi mọi phần tử của b đều dương - D. Không bao giờ có nghiệm
+Câu 100. Khi có nhiều bộ trọng số khác nhau (ví dụ nhiều trường, mỗi trường một
+cách tính điểm), ta có thể gom chúng lại và bài toán trở thành: - A. Phép cộng ma trận
+- B. Phép nhân hai ma trận XW = Y - C. Phép chuyển vị - D. Hadamard product
+Câu 101. (Đúng/Sai) Ax = b chỉ là một cách viết gọn, về bản chất nó tương đương với
+việc viết ra cả một hệ nhiều phương trình tuyến tính.
+Câu 102. Các khái niệm nâng cao nào được nhắc là “bắt rễ” từ biểu thức Ax = b
+(nhưng nằm ngoài phạm vi bài viết)? - A. Không gian cột, hạng của ma trận, độc lập
+tuyến tính - B. Đạo hàm và tích phân - C. Số phức và lượng giác - D. Hình học không
+gian
+Chương 7 — Phép nhân ma trận với vector (Câu 103–120)
+Câu 103. Cho A ∈ ℝ𝑚×𝑛 và x ∈ ℝ𝑛. Tích Ax là một vector thuộc: - A. ℝ𝑛 - B. ℝ𝑚 - C.
+ℝ𝑚×𝑛 - D. ℝ
+Câu 104. Mỗi thành phần 𝑏𝑖 của tích Ax được tính bằng cách: - A. Cộng tất cả phần
+tử của hàng 𝑖 - B. Lấy hàng thứ 𝑖 của A nhân tương ứng với vector x rồi cộng lại (dot
+product) - C. Nhân phần tử 𝑎𝑖𝑖 với 𝑥𝑖 - D. Lấy phần tử lớn nhất của hàng 𝑖
+Câu 105. Công thức tổng quát cho 𝑏𝑖 là: - A. 𝑏𝑖 = ∑𝑛
+𝑗=1 𝑎𝑖𝑗𝑥𝑗 - B. 𝑏𝑖 = 𝑎𝑖𝑖 + 𝑥𝑖 - C.
+𝑏𝑖 = max𝑗 𝑎𝑖𝑗 - D. 𝑏𝑖 = 𝑎𝑖1 × 𝑥1 (chỉ phần tử đầu)
+Câu 106. Có thể diễn đạt: phép nhân ma trận với vector chính là: - A. Một phép cộng
+đơn giản - B. Nhiều dot product song song, mỗi dot product ứng với một hàng - C. Một
+phép chuyển vị - D. Nhân từng cặp phần tử cùng vị trí
+Câu 107. Điều kiện để phép nhân Ax hợp lệ là: - A. Số hàng của A bằng số cột của x -
+B. Số cột của A bằng số phần tử (số hàng) của x - C. A và x phải cùng shape - D. A phải
+là ma trận vuông
+Câu 108. “Thần chú” nào giúp nhớ quy tắc shape khi nhân? - A. “Hàng trước, cột sau”
+- B. “Đuôi thằng này phải bằng đầu thằng kia” - C. “Vector cột = 1 feature” - D. “Lớn
+nhân nhỏ”
+Câu 109. Trong tích A𝑚×𝑛 x𝑛×1, hai con số nào phải bằng nhau? - A. 𝑚 và 1 - B. 𝑚 và
+𝑛 - C. Con số 𝑛 ở đuôi của A và con số 𝑛 ở đầu của x - D. Không cần bằng nhau
+Câu 110. Kết quả của phép nhân (𝑚 × 𝑛) × (𝑛 × 1) có shape: - A. (𝑛 × 1) - B. (𝑚 × 1)
+- C. (𝑚 × 𝑛) - D. (𝑛 × 𝑛)
+8
+
+-- 8 of 15 --
+
+Câu 111. Cho A = [1 2
+3 4] và x = [1
+2]. Giá trị 𝑏1 (hàng 1) là: - A. 1 × 1 + 2 × 2 = 5 - B.
+1 × 1 + 3 × 2 = 7 - C. 1 + 2 = 3 - D. 1 × 2 = 2
+Câu 112. Với cùng dữ liệu câu trên, giá trị 𝑏2 (hàng 2) là: - A. 3 × 1 + 4 × 2 = 11 - B.
+3 + 4 = 7 - C. 2 × 1 + 4 × 2 = 10 - D. 3 × 2 = 6
+Câu 113. Vậy kết quả Ax của hai câu trên là: - A. [ 5
+11] - B. [7
+7] - C. [1
+8] - D. [3
+6]
+Câu 114. Điểm khác biệt cốt lõi giữa phép nhân ma trận và Hadamard product là gì?
+- A. Không có khác biệt - B. Nhân ma trận có bước cộng dồn (dot product theo hàng);
+Hadamard chỉ nhân từng cặp phần tử cùng vị trí, không cộng dồn - C. Hadamard cần
+ma trận vuông, nhân ma trận thì không - D. Nhân ma trận chỉ dùng cho scalar
+Câu 115. Cho A = [1 2
+3 4], B = [5 6
+7 8]. Tích Hadamard A ⊙ B là: - A. [19 22
+43 50] - B.
+[ 5 12
+21 32] - C. [ 6 8
+10 12] - D. [5 6
+7 8]
+Câu 116. Với cùng A, B ở câu trên, tích ma trận AB (hàng nhân cột, cộng dồn) cho
+phần tử ở góc trên trái là: - A. 1 × 5 = 5 - B. 1 × 5 + 2 × 7 = 19 - C. 1 × 5 + 2 × 6 = 17
+- D. 1 + 5 = 6
+Câu 117. (Đúng/Sai) Phép nhân ma trận và Hadamard product thường cho cùng một
+kết quả nếu áp dụng lên cùng cặp ma trận.
+Câu 118. Phép nhân ma trận nói chung có tính giao hoán không? - A. Có, luôn luôn -
+B. Không, nói chung AB ≠ BA - C. Chỉ khi các phần tử dương - D. Chỉ khi là vector
+Câu 119. Nếu A có shape (3, 2) và x có shape (3, 1), phép nhân Ax có hợp lệ không? -
+A. Có, vì cùng có số 3 - B. Không, vì số cột của A là 2 nhưng số hàng của x là 3 (không
+khớp) - C. Có, luôn hợp lệ - D. Chỉ khi chuyển vị x
+Câu 120. Trong câu trên, để phép nhân Ax (với A shape (3, 2)) hợp lệ, x cần có shape:
+- A. (3, 1) - B. (2, 1) - C. (1, 3) - D. (3, 3)
+PHẦN ĐÁP ÁN VÀ GIẢI THÍCH
+Mỗi đáp án ghi kèm vị trí trong blog để tra cứu lại.
+Chương 1 — Scalar, Variable và Constant
+Câu 1. B — Scalar là một giá trị đơn, một con số duy nhất. (Mục 1.1 — Scalar)
+Câu 2. C — Scalar là đối tượng không chiều: một con số đứng một mình, không cần
+trục nào để sắp xếp. (Mục 1.1 — Scalar)
+Câu 3. C — 𝑥 ∈ ℝ đọc là “x thuộc tập số thực”, tức x là một số thực — một scalar.
+(Mục 1.1 — Scalar)
+Câu 4. B — Variable là giá trị chưa biết hoặc có thể thay đổi trong bài toán đang xét.
+(Mục 1.2 — Variable)
+9
+
+-- 9 of 15 --
+
+Câu 5. A — Constant là scalar có giá trị đã biết trước hoặc cố định trong ngữ cảnh
+hiện tại. (Mục 1.3 — Constant)
+Câu 6. C — Trong 2𝑥 + 3 = 7, x là ẩn số chưa biết → variable. (Mục 1.2 — Variable)
+Câu 7. B — Số 3 và 7 là những giá trị cố định đã biết → constant. (Mục 1.3 — Constant)
+Câu 8. C — Vai trò variable/constant không phải thuộc tính cố hữu của con số, mà
+phụ thuộc ngữ cảnh bài toán. (Mục 1.3 — Constant)
+Câu 9. B — Trong giai đoạn huấn luyện, w và b là ẩn số cần tìm → variable. (Mục 1.3
+— Constant, ví dụ giá nhà)
+Câu 10. B — Sau khi tìm được giá trị, w và b “đóng băng” thành con số cố định →
+constant. (Mục 1.3 — Constant)
+Câu 11. A — Khi công thức đã cố định, area là đầu vào thay đổi tùy từng căn nhà →
+variable. (Mục 1.3 — Constant)
+Câu 12. Sai — Một đại lượng có thể là variable ở bài toán này và constant ở bài toán
+khác; vai trò phụ thuộc ngữ cảnh. (Mục 1.3 — Constant)
+Câu 13. B — Scalar ký hiệu bằng chữ cái viết thường, không in đậm. (Mục 1.1, 2.1 —
+quy ước ký hiệu)
+Câu 14. Đúng — Đây chính là ý nghĩa của “vai trò phụ thuộc ngữ cảnh”. (Mục 1.3 —
+Constant)
+Câu 15. B — Số 5 là một giá trị đơn → scalar. Các lựa chọn khác là vector/bảng/ảnh.
+(Mục 1.1 — Scalar)
+Câu 16. B — Variable và constant đều là scalar, chỉ khác nhau ở vai trò trong bài toán.
+(Mục 1.1–1.3)
+Chương 2 — Vector
+Câu 17. B — Vector là danh sách có thứ tự gồm nhiều scalar. (Mục 2.1 — Định nghĩa)
+Câu 18. B — Vector là đối tượng một chiều: các số xếp thành dãy dọc theo một trục.
+(Mục 2.1 — Định nghĩa)
+Câu 19. A — Vector ký hiệu bằng chữ cái viết thường in đậm. (Mục 2.1 — Định nghĩa)
+Câu 20. B — x ∈ ℝ𝑚 nghĩa là vector gồm m số thực. (Mục 2.1 — Định nghĩa)
+Câu 21. B — ℝ là tập số thực (một số = scalar); ℝ𝑚 là tập vector gồm m số thực. (Mục
+2.1 — Định nghĩa)
+Câu 22. C — Vector có 3 thành phần nên thuộc ℝ3. (Mục 2.1 — Định nghĩa)
+Câu 23. B — Số mũ m cho biết vector có bao nhiêu thành phần. (Mục 2.1 — Định
+nghĩa)
+Câu 24. B — Nhiều scalar hợp lại theo chiều dọc tạo thành vector cột. (Mục 2.1 —
+Định nghĩa)
+10
+
+-- 10 of 15 --
+
+Câu 25. C — Vector hàng thu được bằng phép chuyển vị (transpose). (Mục 2.2 —
+Vector hàng và phép chuyển vị)
+Câu 26. B — ⊤ là ký hiệu chuyển vị (transpose). (Mục 2.2)
+Câu 27. B — Chuyển vị chỉ đổi cách sắp xếp (cột ↔ hàng), không đổi giá trị. (Mục 2.2)
+Câu 28. B — Mặc định, nếu không nói gì thêm, vector được hiểu là vector cột. (Mục
+2.3 — Quy ước vector cột)
+Câu 29. Sai — Đây chỉ là quy ước phổ biến, không phải định luật bắt buộc trong mọi
+tài liệu. (Mục 2.3)
+Câu 30. B — “Thần chú”: vector cột thường đại diện cho một feature. (Mục 2.3 — Quy
+ước vector cột)
+Câu 31. B — “Thần chú”: vector hàng thường đại diện cho một sample gồm nhiều
+feature. (Mục 2.3)
+Câu 32. B — Một số tài liệu dùng x′ (dấu phẩy trên), nhưng x⊤ phổ biến và rõ hơn.
+(Mục 2.2)
+Câu 33. C — Mỗi 𝑥𝑖 viết thường là một scalar — thành phần đơn lẻ của vector. (Mục
+2.1)
+Câu 34. B — x in đậm là vector (nhiều số); 𝑥 không đậm là scalar (một số). (Mục 2.1
+— Định nghĩa)
+Chương 3 — Matrix
+Câu 35. C — Matrix là mảng số hai chiều, sắp xếp thành hàng và cột. (Mục 3.1 —
+Định nghĩa)
+Câu 36. C — Matrix là đối tượng hai chiều. (Mục 3.1)
+Câu 37. B — Ma trận có thể hiểu là nhiều vector cột đặt cạnh nhau. (Mục 3.1 — Định
+nghĩa)
+Câu 38. B — Ma trận ký hiệu bằng chữ in hoa, thường in đậm. (Mục 3.1)
+Câu 39. B — ℝ𝑚×𝑛 nghĩa là m hàng, n cột. (Mục 3.1, 3.2)
+Câu 40. C — Ma trận 𝑚 × 𝑛 có tổng cộng 𝑚 × 𝑛 phần tử. (Mục 3.1)
+Câu 41. B — “Hàng trước, cột sau”. (Mục 3.2 — Chỉ số của phần tử)
+Câu 42. B — ℝ5×2 = 5 hàng, 2 cột (hàng trước, cột sau). (Mục 3.2)
+Câu 43. C — 5 × 2 = 10 phần tử. (Mục 3.2)
+Câu 44. B — 𝑥𝑖,𝑗 nằm ở hàng thứ i, cột thứ j (hàng trước, cột sau). (Mục 3.2)
+Câu 45. A — Một ô bất kỳ trong bảng là một scalar. (Mục 3.3 — Ma trận như một
+bảng dữ liệu)
+Câu 46. B — Một cột hoặc một hàng là một vector. (Mục 3.3)
+Câu 47. C — Toàn bộ bảng là một matrix. (Mục 3.3)
+11
+
+-- 11 of 15 --
+
+Câu 48. B — 100 sample (hàng) × 8 feature (cột) = ma trận 100 × 8. (Mục 3.3)
+Câu 49. Sai — ℝ3×4 (3 hàng, 4 cột) khác ℝ4×3 (4 hàng, 3 cột); thứ tự quan trọng. (Mục
+3.2 — Hàng trước cột sau)
+Câu 50. B — Mỗi x𝑗 là một vector cột. (Mục 3.1 — Định nghĩa)
+Chương 4 — Tensor
+Câu 51. B — Tensor là đối tượng tổng quát cho các mảng số nhiều chiều. (Mục 4.1 —
+Định nghĩa)
+Câu 52. A — Scalar là tensor bậc 0. (Mục 4.1)
+Câu 53. B — Vector là tensor bậc 1. (Mục 4.1)
+Câu 54. C — Matrix là tensor bậc 2. (Mục 4.1)
+Câu 55. B — Thị giác máy tính (computer vision) thường cần tensor nhiều chiều. (Mục
+4.1)
+Câu 56. C — Ảnh RGB tách thành 3 ma trận: Red, Green, Blue. (Mục 4.2 — Ví dụ ảnh
+màu RGB)
+Câu 57. B — Ảnh 600 × 800 RGB → tensor 600 × 800 × 3. (Mục 4.2)
+Câu 58. B — “Thần chú”: tensor là nhiều lát ma trận cùng kích thước stack theo chiều
+sâu. (Mục 4.2)
+Câu 59. C — Ba ma trận R, G, B stack theo chiều sâu (channel). (Mục 4.2)
+Câu 60. Đúng — Scalar/vector/matrix đều là trường hợp riêng của tensor, phân theo
+bậc. (Mục 4.1)
+Chương 5 — Các phép toán trên vector và ma trận
+Câu 61. B — Operator là một quy tắc dùng để biến đổi dữ liệu. (Đầu Chương 5)
+Câu 62. B — Cộng vector theo kiểu element-wise: cộng từng cặp phần tử cùng vị trí.
+(Mục 5.1)
+Câu 63. A — [1, 2, 3] + [4, 5, 6] = [5, 7, 9]. (Mục 5.1)
+Câu 64. B — [4, 5, 6] − [1, 2, 3] = [3, 3, 3]. (Mục 5.1)
+Câu 65. A — Điều kiện element-wise mặc định: hai toán hạng cùng shape. (Mục 5.1)
+Câu 66. B — Kết quả cộng/trừ giữ nguyên shape với các toán hạng. (Mục 5.1)
+Câu 67. B — Không, vì khác shape (3 vs 2 phần tử) — trừ khi có broadcasting. (Mục
+5.1)
+Câu 68. A — Phép cộng ma trận có tính giao hoán. (Mục 5.2 — Tính giao hoán)
+Câu 69. B — Phép trừ nói chung không giao hoán. (Mục 5.2)
+Câu 70. B — Hadamard product: nhân element-wise giữa hai đối tượng cùng shape.
+(Mục 5.3)
+12
+
+-- 12 of 15 --
+
+Câu 71. B — Ký hiệu Hadamard product là ⊙. (Mục 5.3)
+Câu 72. B — [1, 2, 3] ⊙ [4, 5, 6] = [4, 10, 18]. (Mục 5.3)
+Câu 73. B — Ký hiệu Hadamard division là ⊘. (Mục 5.3)
+Câu 74. A — [8, 10, 12] ⊘ [2, 5, 3] = [4, 2, 4]. (Mục 5.3)
+Câu 75. A — Hadamard product có tính giao hoán. (Mục 5.3)
+Câu 76. B — Hadamard division không giao hoán. (Mục 5.3)
+Câu 77. A — Broadcasting: mở rộng tạm thời đối tượng nhỏ hơn cho khớp với đối
+tượng lớn hơn. (Mục 5.4)
+Câu 78. Sai — Broadcasting là quy tắc tính toán, không nhất thiết tạo bản sao thật
+trong bộ nhớ. (Mục 5.4)
+Câu 79. A — [1, 2, 3] + 10 = [11, 12, 13] (scalar broadcast cho mọi phần tử). (Mục 5.4)
+Câu 80. B — Vector hàng 1 × 2 broadcast theo hàng (số cột phải khớp). (Mục 5.4)
+Câu 81. B — Vector cột 3 × 1 broadcast theo cột (số hàng phải khớp). (Mục 5.4)
+Câu 82. B — Scalar broadcast được vì được hiểu là “áp dụng cùng một giá trị cho mọi
+phần tử”. (Mục 5.4)
+Chương 6 — Bản chất của ma trận
+Câu 83. B — Ma trận là cách viết cô đọng của một hệ phương trình tuyến tính cùng
+cấu trúc. (Đầu Chương 6)
+Câu 84. B — Tổng hệ số = 3+2+1 = 6. (Mục 6.1)
+Câu 85. B — Các phương trình có cùng cấu trúc, chỉ khác dữ liệu từng học sinh. (Mục
+6.2 — Nhận ra cấu trúc lặp lại)
+Câu 86. B — Dạng tổng quát là Ax = b. (Mục 6.3 — Cô đọng thành Ax = b)
+Câu 87. B — A là ma trận hệ số/dữ liệu, chứa các giá trị đã biết. (Mục 6.3)
+Câu 88. B — x là vector ẩn/trọng số chưa biết cần tìm. (Mục 6.3)
+Câu 89. C — b là vector kết quả đã biết. (Mục 6.3)
+Câu 90. B — Mỗi hàng đại diện cho một học sinh (sample/individual). (Mục 6.1, 6.3)
+Câu 91. B — Mỗi cột đại diện cho một môn học (feature). (Mục 6.1, 6.3)
+Câu 92. B — Vì shape phải khớp khi nhân ma trận. (Mục 6.3, 7.2)
+Câu 93. B — Bảng 𝑚 × 𝑛 cần vector trọng số shape 𝑛 × 1. (Mục 6.3, 7.2)
+Câu 94. B — (𝑚 × 𝑛) × (𝑛 × 1) → (𝑚 × 1). (Mục 6.3, 7.2)
+Câu 95. B — Nhấn mạnh bản chất ma trận là công cụ cô đọng hệ phương trình. (Mục
+6.3)
+Câu 96. B — Lấy từng cột của A nhân một số (từ x) rồi cộng lại = tổ hợp tuyến tính.
+(Mục 6.4)
+13
+
+-- 13 of 15 --
+
+Câu 97. A — 10[1, 2, 3] + 20[4, 5, 6] = [10, 20, 30] + [80, 100, 120] = [90, 120, 150].
+(Mục 6.4)
+Câu 98. B — Mỗi thành phần của x là “liều lượng” pha trộn cho một cột của A. (Mục
+6.4)
+Câu 99. B — Ax = b có nghiệm khi b tạo được bằng tổ hợp tuyến tính các cột của A.
+(Mục 6.4)
+Câu 100. B — Gom nhiều bộ trọng số thành ma trận → phép nhân hai ma trận XW = Y.
+(Mục 7.5, và 6.4)
+Câu 101. Đúng — Ax = b tương đương với cả một hệ phương trình tuyến tính, chỉ
+viết gọn hơn. (Mục 6.3)
+Câu 102. A — Không gian cột, hạng (rank), độc lập tuyến tính — các chủ đề bắt rễ từ
+Ax = b (ngoài phạm vi bài). (Mục 6.4)
+Chương 7 — Phép nhân ma trận với vector
+Câu 103. B — Ax là vector thuộc ℝ𝑚. (Mục 7.1 — Định nghĩa)
+Câu 104. B — Mỗi 𝑏𝑖 = dot product của hàng thứ i với vector x. (Mục 7.1)
+Câu 105. A — 𝑏𝑖 = ∑𝑛
+𝑗=1 𝑎𝑖𝑗𝑥𝑗. (Mục 7.1)
+Câu 106. B — Là nhiều dot product song song, mỗi cái ứng với một hàng. (Mục 7.1)
+Câu 107. B — Số cột của A phải bằng số phần tử (số hàng) của x. (Mục 7.2 — Điều
+kiện shape)
+Câu 108. B — “Đuôi thằng này phải bằng đầu thằng kia”. (Mục 7.2)
+Câu 109. C — Con số n ở đuôi của A phải bằng n ở đầu của x. (Mục 7.2)
+Câu 110. B — (𝑚 × 𝑛) × (𝑛 × 1) → (𝑚 × 1). (Mục 7.2)
+Câu 111. A — 𝑏1 = 1 × 1 + 2 × 2 = 5. (Mục 7.3 — Ví dụ)
+Câu 112. A — 𝑏2 = 3 × 1 + 4 × 2 = 11. (Mục 7.3)
+Câu 113. A — Ax = [5, 11]⊤. (Mục 7.3)
+Câu 114. B — Nhân ma trận có bước cộng dồn (dot product); Hadamard chỉ nhân
+từng cặp phần tử cùng vị trí. (Mục 7.4)
+Câu 115. B — A ⊙ B: nhân từng cặp → [[5, 12], [21, 32]]. (Mục 7.4)
+Câu 116. B — AB góc trên trái = 1 × 5 + 2 × 7 = 19. (Mục 7.4)
+Câu 117. Sai — Hai phép thường cho kết quả khác hẳn nhau (ví dụ ở Mục 7.4). (Mục
+7.4)
+Câu 118. B — Phép nhân ma trận nói chung không giao hoán. (Mục 7.4)
+Câu 119. B — Không hợp lệ: số cột của A (2) khác số hàng của x (3). (Mục 7.2)
+Câu 120. B — Với A shape (3, 2), x cần shape (2, 1) để hợp lệ. (Mục 7.2)
+14
+
+-- 14 of 15 --
+
+Hết. Chúc bạn và mọi người ôn tập hiệu quả!
+15
+
+-- 15 of 15 --
+
